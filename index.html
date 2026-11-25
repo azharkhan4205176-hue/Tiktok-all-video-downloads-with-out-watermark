@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khan Video Saver</title>
+<meta name="description" content="Free online video saver for your own videos.">
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;padding:25px 15px;
+background:#101827;color:white;
+font-family:Arial;text-align:center
+}
+.container{
+max-width:480px;margin:45px auto;
+padding:25px;background:#1c2b42;
+border-radius:18px
+}
+h1{color:#20d9ed}
+input,button{
+width:100%;padding:14px;
+margin:12px 0;border-radius:9px
+}
+input{background:white;color:black}
+button{
+background:#20d9ed;border:0;
+font-weight:bold;font-size:16px
+}
+video{width:100%;margin-top:15px}
+small{color:#c5d1df}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>KHAN VIDEO SAVER</h1>
+<p>Free Online Video Saver</p>
+<h3>Upload Your Own Video</h3>
+<input type="file" id="file" accept="video/*">
+<video id="preview" controls hidden></video>
+<button id="save" disabled>Download Video</button>
+<p><small>Save your own or authorized videos.</small></p>
+</div>
+<script>
+let url="";
+const file=document.getElementById("file");
+const preview=document.getElementById("preview");
+const save=document.getElementById("save");
+
+file.onchange=()=>{
+const f=file.files[0];
+if(!f)return;
+if(!f.type.startsWith("video/")){
+alert("Select a video file");
+return;
+}
+if(url)URL.revokeObjectURL(url);
+url=URL.createObjectURL(f);
+preview.src=url;
+preview.hidden=false;
+save.disabled=false;
+};
+
+save.onclick=()=>{
+if(!url)return;
+const a=document.createElement("a");
+a.href=url;
+a.download=file.files[0].name;
+a.click();
+};
+</script>
+</body>
+</html>
