@@ -4,34 +4,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khan TikTok Downloader</title>
+<title>Khan All Video Downloader</title>
 <style>
 *{box-sizing:border-box}
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#090909,#242424);
+background:linear-gradient(135deg,#090909,#252525);
 color:white;
 text-align:center;
-min-height:100vh;
-padding:25px 15px;
+padding:20px;
 }
 .container{
-max-width:480px;
-margin:50px auto;
-padding:28px 20px;
-background:#181818;
-border-radius:18px;
+max-width:500px;
+margin:55px auto;
+padding:30px 20px;
+background:#171717;
+border-radius:20px;
 box-shadow:0 5px 25px #000;
 }
-h1{font-size:30px}
-h1 span{color:#fe2c55}
+.logo{font-size:35px;font-weight:bold}
+.logo span{color:#fe2c55}
+h2{margin-top:25px}
 p{color:#bbb;line-height:1.6}
 input{
 width:100%;
 padding:16px;
-border-radius:10px;
 border:1px solid #555;
+border-radius:10px;
 background:#292929;
 color:white;
 font-size:15px;
@@ -39,27 +39,50 @@ margin:15px 0;
 }
 button{
 width:100%;
-padding:15px;
+padding:16px;
 background:#fe2c55;
+color:white;
 border:0;
 border-radius:10px;
-color:white;
 font-size:17px;
 font-weight:bold;
+cursor:pointer;
 }
-button:active{background:#d91c45}
-#message{margin-top:20px}
+button:hover{background:#d91c45}
+.services{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+margin:25px 0;
+}
+.services span{
+background:#303030;
+padding:10px 15px;
+border-radius:20px;
+}
+#message{margin-top:20px;color:#fff}
 footer{color:#888;font-size:12px;margin-top:30px}
 </style>
 </head>
 <body>
 <div class="container">
-<h1><span>KHAN</span> TikTok Downloader</h1>
-<p>Download TikTok videos easily</p>
+
+<div class="logo"><span>KHAN</span> DOWNLOADER</div>
+
+<h2>All Video Downloader</h2>
+<p>Paste your video link below</p>
+
+<div class="services">
+<span>TikTok</span>
+<span>Instagram</span>
+<span>Facebook</span>
+<span>YouTube</span>
+</div>
 
 <input id="videoLink"
 type="url"
-placeholder="Paste TikTok video link here">
+placeholder="Paste video URL here">
 
 <button onclick="downloadVideo()">
 Download Video
@@ -69,6 +92,8 @@ Download Video
 
 <footer>
 Khan Downloader © 2026
+<br><br>
+Download only content you are authorized to save.
 </footer>
 </div>
 
@@ -77,12 +102,22 @@ function downloadVideo(){
 const link=document.getElementById("videoLink").value.trim();
 const msg=document.getElementById("message");
 
-if(!link || !/tiktok\.com/i.test(link)){
-msg.innerText="Please enter a valid TikTok link.";
+if(!link){
+msg.innerText="Please paste a video link.";
 return;
 }
 
-msg.innerText="Link received. Download service API is not connected yet.";
+try{
+const url=new URL(link);
+if(!["http:","https:"].includes(url.protocol)){
+throw new Error();
+}
+}catch(e){
+msg.innerText="Please enter a valid URL.";
+return;
+}
+
+msg.innerText="Link received. A compatible video download service must be connected to download the video.";
 }
 </script>
 </body>
