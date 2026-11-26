@@ -1,0 +1,13 @@
+
+{
+  "name": "khan-tiktok-backend",
+  "version": "1.0.0",
+  "description": "Khan TikTok Downloader backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
